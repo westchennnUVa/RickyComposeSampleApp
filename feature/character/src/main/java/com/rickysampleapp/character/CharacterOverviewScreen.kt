@@ -14,9 +14,10 @@ fun CharacterOverviewRoute(
     modifier: Modifier = Modifier,
     viewModel: CharacterOverviewViewModel = hiltViewModel()
 ) {
-    // TODO 是不是有个lifecycle的？
+    // TODO do we have lifecycle aware one?
     val characterUiState by viewModel.stateFlow.collectAsState()
 
+    // TODO I don't think this should be like this using LaunchedEffect, need to adjust
     LaunchedEffect(Unit) {
         viewModel.getCharacter(1)
     }
