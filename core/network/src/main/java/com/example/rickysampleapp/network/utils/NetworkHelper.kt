@@ -17,6 +17,12 @@ sealed interface NetworkResponse<T> {
         }
         return this
     }
+
+    fun <R> mapResult(block: (T) -> (R)): NetworkResponse<R> =
+        when (this) {
+            is Success -> Success(block(data))
+            is Failure -> Failure(exception)
+        }
 }
 
 internal inline fun <T> safeApiCall(apiCall: () -> T): NetworkResponse<T> =

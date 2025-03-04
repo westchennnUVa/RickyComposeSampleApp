@@ -21,5 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "RickySampleApp"
 include(":app")
-include(":network")
+include(":core:data")
+include(":core:network")
 include(":feature:character")
+include(":core:model")

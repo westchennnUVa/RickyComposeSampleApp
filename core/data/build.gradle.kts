@@ -1,14 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-
 }
 
 android {
-    namespace = "com.rickysampleapp.character"
+    namespace = "com.rickysampleapp.data"
     compileSdk = 34
 
     defaultConfig {
@@ -34,9 +32,6 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
 val hilt_version: String by project
@@ -50,16 +45,11 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.material3)
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
-
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
-
-    implementation(project(":core:data"))
+    api(project(":core:network"))
+    api(project(":core:model"))
 }
 
 kapt {
