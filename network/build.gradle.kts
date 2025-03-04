@@ -1,14 +1,13 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
-
+    kotlin("plugin.serialization") version "2.1.10"
 }
 
 android {
-    namespace = "com.rickysampleapp.character"
+    namespace = "com.example.rickysampleapp.network"
     compileSdk = 34
 
     defaultConfig {
@@ -34,12 +33,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    buildFeatures {
-        compose = true
-    }
 }
 
-val hilt_version: String by project
+val ktor_version: String by project
 
 dependencies {
 
@@ -50,16 +46,25 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.material3)
-    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    // hilt
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 
-    implementation("com.google.dagger:hilt-android:$hilt_version")
-    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+    // ktor
+    implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation("io.ktor:ktor-client-cio:$ktor_version")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
+    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+    implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation("io.ktor:ktor-client-cio:$ktor_version")
+    implementation("io.ktor:ktor-client-okhttp:$ktor_version")
+    implementation("io.ktor:ktor-client-logging:$ktor_version")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
 
 
-    implementation(project(":network"))
+
+
 }
 
 kapt {
