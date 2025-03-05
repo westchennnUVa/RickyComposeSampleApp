@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.rickysampleapp.ui.theme.RickySampleAppTheme
 import com.rickysampleapp.character.CharacterOverviewRoute
+import com.rickysampleapp.home.HomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,7 +24,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             RickySampleAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    CharacterOverviewRoute(modifier = Modifier.padding(innerPadding))
+                    // CharacterOverviewRoute(modifier = Modifier.padding(innerPadding))
+                    HomeScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

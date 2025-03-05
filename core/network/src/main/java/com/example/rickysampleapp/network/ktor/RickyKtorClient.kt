@@ -2,6 +2,7 @@ package com.example.rickysampleapp.network.ktor
 
 import com.example.rickysampleapp.network.RickyNetworkDataSource
 import com.example.rickysampleapp.network.dto.CharacterDto
+import com.example.rickysampleapp.network.dto.CharactersDto
 import com.example.rickysampleapp.network.utils.NetworkResponse
 import com.example.rickysampleapp.network.utils.safeApiCall
 import io.ktor.client.HttpClient
@@ -13,6 +14,7 @@ import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.client.request.get
+import io.ktor.http.appendPathSegments
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
@@ -40,6 +42,17 @@ class RickyKtorClient @Inject constructor(
         ktorClient
             .get("character/$id")
             .body<CharacterDto>()
+    }
+
+    override suspend fun getCharacters(page: Int): NetworkResponse<CharactersDto> = safeApiCall {
+        ktorClient
+            .get {
+                url {
+                    appendPathSegments("character")
+                    parameters.append("page", page.toString())
+                }
+            }
+            .body<CharactersDto>()
     }
 
     companion object {

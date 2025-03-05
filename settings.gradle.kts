@@ -23,5 +23,7 @@ rootProject.name = "RickySampleApp"
 include(":app")
 include(":core:data")
 include(":core:network")
-include(":feature:character")
 include(":core:model")
+include(":feature:character-detail")
+include(":feature:home")
+include(":core:common")

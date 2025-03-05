@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.rickysampleapp.data"
+    namespace = "com.rickysampleapp.common"
     compileSdk = 34
 
     defaultConfig {
@@ -47,12 +47,4 @@ dependencies {
 
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
-
-    api(project(":core:network"))
-    api(project(":core:model"))
-    implementation(project(":core:common"))
-}
-
-kapt {
-    correctErrorTypes = true
 }

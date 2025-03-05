@@ -64,7 +64,8 @@ dependencies {
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
-    implementation(project(":feature:character"))
+    implementation(project(":feature:home"))
+    implementation(project(":feature:character-detail"))
 }
 
 kapt {
