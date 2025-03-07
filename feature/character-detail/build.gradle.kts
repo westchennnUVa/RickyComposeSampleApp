@@ -5,6 +5,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.dagger.hilt.android")
 
+    kotlin("plugin.serialization") version "2.1.10"
 }
 
 android {
@@ -57,6 +58,13 @@ dependencies {
 
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+
+    val nav_version = "2.8.8"
+    // Jetpack Compose integration
+    implementation("androidx.navigation:navigation-compose:$nav_version")
+
+    // serialize
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
 
 
     implementation(project(":core:data"))

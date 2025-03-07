@@ -20,7 +20,6 @@ fun CharacterCard(
 ) {
     Card(
         modifier = modifier
-            .fillMaxSize()
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),

@@ -1,6 +1,5 @@
 package com.rickysampleapp.character
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rickeysampleapp.model.CharacterModel

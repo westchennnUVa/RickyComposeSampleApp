@@ -10,7 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun CharacterOverviewRoute(
+fun CharacterDetailScreen(
+    characterId: Int,
     modifier: Modifier = Modifier,
     viewModel: CharacterOverviewViewModel = hiltViewModel()
 ) {
@@ -19,7 +20,7 @@ fun CharacterOverviewRoute(
 
     // TODO I don't think this should be like this using LaunchedEffect, need to adjust
     LaunchedEffect(Unit) {
-        viewModel.getCharacter(1)
+        viewModel.getCharacter(characterId)
     }
     Surface(modifier = modifier) {
         when (val uiState = characterUiState) {

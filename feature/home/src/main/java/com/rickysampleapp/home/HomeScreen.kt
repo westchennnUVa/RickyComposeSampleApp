@@ -1,6 +1,7 @@
 package com.rickysampleapp.home
 
 import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -19,7 +20,8 @@ import com.rickysampleapp.home.utils.HomeConstants.THRESHOLD
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    homeViewModel: HomeViewModel = hiltViewModel()
+    homeViewModel: HomeViewModel = hiltViewModel(),
+    onCharacterClicked: (Int) -> Unit
 ) {
     val uiState by homeViewModel.uiState.collectAsStateWithLifecycle()
     val characterList by homeViewModel.characterList.collectAsStateWithLifecycle()
@@ -33,7 +35,10 @@ fun HomeScreen(
                 if ((index + THRESHOLD) >= characterList.size && uiState != HomeUiState.Loading) {
                     homeViewModel.fetchNextCharacterList()
                 }
-                CharacterCard(character)
+                CharacterCard(
+                    character,
+                    Modifier.clickable { onCharacterClicked(character.id) }
+                )
             }
         }
     }
