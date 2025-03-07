@@ -1,23 +1,19 @@
 package com.example.rickysampleapp.network.dto
 
 import com.rickeysampleapp.model.CharactersModel
+import com.rickeysampleapp.model.PaginationInfoModel
+import com.rickysampleapp.common.model.PaginationInfoType
 import kotlinx.serialization.Serializable
 
+// TODO maybe should not have this characterS Dto at the first place?
 @Serializable
 data class CharactersDto(
-    val info: InfoDto?,
+    val info: PaginationInfoDto?,
     val results: List<CharacterDto>?
 )
 
-@Serializable
-data class InfoDto(
-    val count: Int?,
-    val pages: Int?,
-    val next: String?,
-    val prev: String?
-)
-
-fun CharactersDto.toModel(): CharactersModel = CharactersModel(
-    next = info?.next ?: CharactersModel.NO_NEXT_PAGE,
+fun CharactersDto.toModel(type: PaginationInfoType): CharactersModel = CharactersModel(
+    info = info?.toModel(type) ?: PaginationInfoModel(type),
     characters = results?.map { it.toModel() } ?: emptyList()
 )
+

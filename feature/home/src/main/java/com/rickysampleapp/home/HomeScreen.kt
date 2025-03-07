@@ -1,5 +1,6 @@
 package com.rickysampleapp.home
 
+import android.util.Log
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -29,9 +30,8 @@ fun HomeScreen(
             contentPadding = PaddingValues(8.dp)
         ) {
             itemsIndexed(items = characterList, key = { _, character -> character.id }) { index, character ->
-                // TODO
                 if ((index + THRESHOLD) >= characterList.size && uiState != HomeUiState.Loading) {
-//                    fetchNextCharacterList()
+                    homeViewModel.fetchNextCharacterList()
                 }
                 CharacterCard(character)
             }

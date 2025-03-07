@@ -51,6 +51,7 @@ dependencies {
     api(project(":core:network"))
     api(project(":core:model"))
     implementation(project(":core:common"))
+    implementation(project(":core:database"))
 }
 
 kapt {

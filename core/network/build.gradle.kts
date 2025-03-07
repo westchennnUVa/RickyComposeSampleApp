@@ -47,6 +47,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(project(":core:model"))
+    implementation(project(":core:common"))
 
     // hilt
     implementation("com.google.dagger:hilt-android:2.51.1")

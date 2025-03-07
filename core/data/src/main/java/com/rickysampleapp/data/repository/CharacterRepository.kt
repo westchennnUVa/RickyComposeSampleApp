@@ -2,7 +2,7 @@ package com.rickysampleapp.data.repository
 
 import com.example.rickysampleapp.network.utils.NetworkResponse
 import com.rickeysampleapp.model.CharacterModel
-import com.rickeysampleapp.model.CharactersModel
+import com.rickeysampleapp.model.PaginationInfoModel
 import kotlinx.coroutines.flow.Flow
 
 interface CharacterRepository {
@@ -14,5 +14,5 @@ interface CharacterRepository {
         onStart: () -> Unit,
         onComplete: () -> Unit,
         onError: (String?) -> Unit
-    ): Flow<CharactersModel>
+    ): Flow<Pair<PaginationInfoModel, List<CharacterModel>>>
 }
