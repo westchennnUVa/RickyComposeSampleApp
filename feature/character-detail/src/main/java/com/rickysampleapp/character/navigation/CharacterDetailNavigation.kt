@@ -19,7 +19,7 @@ fun NavController.navigateToCharacterDetail(characterId: Int, navOptions: NavOpt
 
 fun NavGraphBuilder.characterDetailScreen() {
     composable<CharacterDetailRoute> { navBackStackEntry ->
-        val characterDetailRoute: CharacterDetailRoute = navBackStackEntry.toRoute()
-        CharacterDetailScreen(characterId = characterDetailRoute.characterId)
+//        val characterDetailRoute: CharacterDetailRoute = navBackStackEntry.toRoute()
+        CharacterDetailScreen()
     }
 }

@@ -1,7 +1,7 @@
 package com.example.rickysampleapp.network.ktor
 
 import com.example.rickysampleapp.network.RickyNetworkDataSource
-import com.example.rickysampleapp.network.dto.CharacterDto
+import com.example.rickysampleapp.network.dto.CharacterDetailDto
 import com.example.rickysampleapp.network.dto.CharactersDto
 import com.example.rickysampleapp.network.utils.NetworkResponse
 import com.example.rickysampleapp.network.utils.safeApiCall
@@ -38,10 +38,10 @@ class RickyKtorClient @Inject constructor(
         // expectSuccess = true
     }
 
-    override suspend fun getCharacter(id: Int): NetworkResponse<CharacterDto> = safeApiCall {
+    override suspend fun getCharacter(id: Int): NetworkResponse<CharacterDetailDto> = safeApiCall {
         ktorClient
             .get("character/$id")
-            .body<CharacterDto>()
+            .body<CharacterDetailDto>()
     }
 
     override suspend fun getCharacters(page: Int): NetworkResponse<CharactersDto> = safeApiCall {

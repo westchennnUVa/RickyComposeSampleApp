@@ -1,43 +1,44 @@
 package com.rickysampleapp.character
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rickeysampleapp.model.CharacterModel
-import com.rickysampleapp.data.repository.CharacterRepositoryImpl
+import androidx.navigation.toRoute
+import com.rickeysampleapp.model.CharacterDetailModel
+import com.rickysampleapp.character.navigation.CharacterDetailRoute
+import com.rickysampleapp.data.repository.CharacterRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CharacterOverviewViewModel @Inject constructor(
-    private val characterRepositoryImpl: CharacterRepositoryImpl
+class CharacterDetailViewModel @Inject constructor(
+    savedStateHandle: SavedStateHandle,
+    private val characterRepository: CharacterRepository
 ): ViewModel() {
 
-    private val _stateflow = MutableStateFlow<CharacterUiState>(CharacterUiState.Loading)
+    // todo learn more about savedStateHandle
+    private val characterId = savedStateHandle.toRoute<CharacterDetailRoute>().characterId
+
+    private val _stateflow = MutableStateFlow<CharacterDetailUiState>(CharacterDetailUiState.Loading)
     val stateFlow = _stateflow.asStateFlow()
 
-    fun getCharacter(id: Int) {
+    init {
         viewModelScope.launch {
-            characterRepositoryImpl
-                .getCharacter(id)
-                // todo where and how to map it to UI Model? If it's necessary?
-                // .mapResult { it }
-                .onSuccess { character ->
-                    _stateflow.update { CharacterUiState.Success(character) }
-                }.onFailure { exception ->
-                    _stateflow.update { CharacterUiState.Failure(exception.message ?: "unknown exception") }
-                }
+            characterRepository.getCharacterDetail(
+                id = characterId,
+                onStart = { _stateflow.tryEmit(CharacterDetailUiState.Loading) },
+                onComplete = { characterDetailModel -> _stateflow.tryEmit(CharacterDetailUiState.Idle(characterDetailModel))  },
+                onError = { message -> _stateflow.tryEmit(CharacterDetailUiState.Error(message)) }
+            )
         }
     }
-
 }
 
-sealed interface CharacterUiState {
-    data object Loading : CharacterUiState
-    // todo where and how to map it to UI Model? If it's necessary? Now it's domain model
-    data class Success(val character: CharacterModel) : CharacterUiState
-    data class Failure(val message: String) : CharacterUiState
+sealed interface CharacterDetailUiState {
+    data object Loading : CharacterDetailUiState
+    data class Idle(val character: CharacterDetailModel) : CharacterDetailUiState
+    data class Error(val message: String?) : CharacterDetailUiState
 }

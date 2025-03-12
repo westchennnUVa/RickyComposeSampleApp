@@ -29,6 +29,12 @@ object DatabaseModule {
 
     @Provides
     @Singleton
+    fun provideCharacterDetailDao(
+        rickyDatabase: RickyDatabase
+    ) = rickyDatabase.characterDetailDao()
+
+    @Provides
+    @Singleton
     fun providePaginationInfoDao(
         rickyDatabase: RickyDatabase
     ) = rickyDatabase.paginationInfoDao()

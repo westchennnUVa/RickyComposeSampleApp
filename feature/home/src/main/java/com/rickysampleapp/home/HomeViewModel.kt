@@ -3,6 +3,7 @@ package com.rickysampleapp.home
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.rickeysampleapp.model.CharacterDetailModel
 import com.rickeysampleapp.model.CharacterModel
 import com.rickysampleapp.data.repository.CharacterRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

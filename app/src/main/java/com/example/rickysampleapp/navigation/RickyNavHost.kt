@@ -6,7 +6,10 @@ import androidx.navigation.compose.NavHost
 import com.example.rickysampleapp.ui.RickyAppState
 import com.rickysampleapp.character.navigation.characterDetailScreen
 import com.rickysampleapp.character.navigation.navigateToCharacterDetail
+import com.rickysampleapp.favorite.favoriteGraph
+import com.rickysampleapp.home.navigation.HomeBaseRoute
 import com.rickysampleapp.home.navigation.HomeRoute
+import com.rickysampleapp.home.navigation.homeGraph
 import com.rickysampleapp.home.navigation.homeScreen
 
 @Composable
@@ -17,12 +20,14 @@ fun RickyNavHost(
     val navController = appState.navController
     NavHost(
         navController = navController,
-        startDestination = HomeRoute,
+        startDestination = HomeBaseRoute,
         modifier = modifier
     ) {
-        homeScreen(
+        homeGraph(
             onCharacterClicked = { characterId -> navController.navigateToCharacterDetail(characterId) }
         )
+        favoriteGraph()
+        // TODO think if needed for a nested graph?
         characterDetailScreen()
     }
 }

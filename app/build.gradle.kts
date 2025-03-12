@@ -74,6 +74,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$nav_version")
 
     implementation(project(":feature:home"))
+    implementation(project(":feature:favorite"))
     implementation(project(":feature:character-detail"))
 
 

@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import com.rickeysampleapp.model.CharacterDetailModel
 import com.rickeysampleapp.model.CharacterModel
 
 @Composable
@@ -42,13 +43,7 @@ private fun CharacterCardPreview() {
         CharacterModel(
             id = 1,
             name = "Rick Sanchez",
-            status = "Alive",
-            species = "Human",
-            type = "",
-            gender = "Male",
-            episode = emptyList(),
             image = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
-            created = 111
         )
     )
 }
