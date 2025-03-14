@@ -24,14 +24,10 @@ class MainActivity : ComponentActivity() {
             val appState = rememberRickyAppState()
 
             RickySampleAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    // CharacterOverviewRoute(modifier = Modifier.padding(innerPadding))
-                    // HomeScreen(modifier = Modifier.padding(innerPadding))
-                    RickyApp(
-                        appState = appState,
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                RickyApp(
+                    appState = appState,
+                    modifier = Modifier.fillMaxSize()
+                )
             }
         }
     }

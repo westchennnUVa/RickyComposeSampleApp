@@ -1,5 +1,6 @@
 package com.example.rickysampleapp.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -26,26 +27,31 @@ fun RickyApp(
     appState: RickyAppState, modifier: Modifier = Modifier
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
+    val currentDestination = appState.currentDestination
 
     Scaffold(modifier = modifier, bottomBar = {
-        // TODO optimize
         NavigationBar {
-            NavigationBarItem(selected = appState.navController.currentBackStackEntry?.destination?.hierarchy?.any {
+            NavigationBarItem(selected = currentDestination?.hierarchy?.any {
                 it.hasRoute(TopLevelDestination.HOME.baseRoute)
-            } ?: false, onClick = { appState.navController.navigateToHomeGraph() }, icon = {
-                Icon(
-                    imageVector = TopLevelDestination.HOME.icon,
-                    contentDescription = TopLevelDestination.HOME.contentDescription
-                )
-            })
-            NavigationBarItem(selected = appState.navController.currentBackStackEntry?.destination?.hierarchy?.any {
+            } ?: false,
+                onClick = { appState.navController.navigateToHomeGraph() },
+                icon = {
+                    Icon(
+                        imageVector = TopLevelDestination.HOME.icon,
+                        contentDescription = TopLevelDestination.HOME.contentDescription
+                    )
+                })
+            NavigationBarItem(selected = currentDestination?.hierarchy?.any {
                 it.hasRoute(TopLevelDestination.FAVORITE.baseRoute)
-            } ?: false, onClick = { appState.navController.navigateToFavoriteGraph() }, icon = {
-                Icon(
-                    imageVector = TopLevelDestination.FAVORITE.icon,
-                    contentDescription = TopLevelDestination.FAVORITE.contentDescription
-                )
-            })
+            } ?: false,
+                onClick = { appState.navController.navigateToFavoriteGraph() },
+                icon = {
+                    Icon(
+                        imageVector = TopLevelDestination.FAVORITE.icon,
+                        contentDescription = TopLevelDestination.FAVORITE.contentDescription
+                    )
+                }
+            )
         }
     }) { innerPadding ->
         RickyApp(appState, snackbarHostState, modifier = Modifier.padding(innerPadding))
